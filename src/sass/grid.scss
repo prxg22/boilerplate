@@ -11,7 +11,8 @@ $col-margin: 10px;
 @mixin column-display() {
 	display: inline-block;
 	float: left;
-	margin: 0 #{$col-margin};
+	padding: 0 #{$col-margin};
+	box-sizing: border-box;
 }
 
 
@@ -99,11 +100,11 @@ $col-margin: 10px;
 
 	// remove padding from row first and last column
 	#{$first-cols}{
-		margin-left: 0;
+		padding-left: 0;
 	}
 
 	#{$last-cols}{
-		margin-right: 0;
+		padding-right: 0;
 	}
 }
 
@@ -117,14 +118,14 @@ $cols: get-columns();
 @include set-columns-width;
 @include set-columns-offset;
 
-.col-no-margin-left{
-	margin-left: 0;
+.col-no-padding-left{
+	padding-left: 0;
 }
 
-.col-no-margin-right{
-	margin-right: 0;
+.col-no-padding-right{
+	padding-right: 0;
 }
-.col-no-margin{
-	@extend .col-no-margin-left;
-	@extend .col-no-margin-right;
+.col-no-padding{
+	@extend .col-no-padding-left;
+	@extend .col-no-padding-right;
 }
