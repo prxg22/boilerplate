@@ -83,6 +83,17 @@ gulp.task('browser-sync', ['sass'], function() {
 	});
 });
 
+
+// init browser-ync on build
+gulp.task('bs-build', ['sass'], function() {
+	return browserSync({
+		server: {
+			baseDir: 'dist/'
+		}
+	});
+});
+
+
 // build distribution 
 gulp.task('build', ['clean'], function(){
 	runSequence('img', 'html', 'bower', 'css', 'js');
@@ -98,14 +109,13 @@ gulp.task('bs-reload', function() {
 	browserSync.reload();
 });
 
+// Build and reload page
+gulp.task('bs-reload-build', function() {
+	runSequence('build', 'bs-reload');
+});
 
 // start browserSync on dist folder and watch html, imagens, js and scss files
-gulp.task('serve:build',['build', 'browser-sync'], function() {
-	gulp.watch(['src/index.html', 'src/partials/**/*.html'], ['build', 'bs-reload']);
-	gulp.watch(['src/img/**/*'], ['build', 'bs-reload']);
-	gulp.watch(['src/sass/**/*.scss'], ['sass']);
-	gulp.watch(['src/js/**/*.js'], ['build', 'bs-reload']);
-});
+gulp.task('serve:build',['build', 'bs-build']);
 
 // start browserSync on src folder and watch html, imagens, js and scss files
 gulp.task('default',['browser-sync'], function() {

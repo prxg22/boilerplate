@@ -5,7 +5,7 @@
 
 
 	app.controller('MainController', [function(){
-		console.log('app started');
+		console.log('app started!');
 	}]);
 
 })();
