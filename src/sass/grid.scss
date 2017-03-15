@@ -1,0 +1,130 @@
+/* CONSTANTS */
+$container-width: 942px;
+$col-margin: 10px;
+
+/* MIXINS */
+
+/**
+ * Set main column properties
+ * @return void
+ */
+@mixin column-display() {
+	display: inline-block;
+	float: left;
+	margin: 0 #{$col-margin};
+}
+
+
+/**
+ * Calculate max-width of .col-{$index}
+ * @param number $index 
+ * @return void
+ */
+@mixin column-width($index) {
+	width: percentage($index/12);
+}
+
+
+/**
+ * Calculate offset size according to {$index}
+ * @param  number $index
+ * @return void
+ */
+@mixin column-offset($index){
+	margin-left: percentage($index/12) !important;
+}
+
+/**
+ * Set cols width
+ * @return void
+ */
+@mixin set-columns-width(){
+	@for $i from 1 through 12 {
+		.col-#{$i}{
+			@include column-width($i);
+		}
+	}
+}
+
+/**
+ * Set columns offset
+ * @return void
+ */
+@mixin set-columns-offset() {
+	@for $i from 1 through 12 {
+		.col-offset-#{$i}{
+			@include column-offset($i);
+		}
+	}
+}
+
+/**
+ * Return cols selector list
+ * @return list
+ */
+@function get-columns($pre: "", $pseudo:""){
+	$i: 1;
+	$list: " #{$pre} .col-#{$i}#{$pseudo}";
+	@for $i from 1 through 12 {
+		$list : "#{$list}, #{$pre} .col-#{$i}#{$pseudo}";
+	}
+
+	@return $list;
+}
+
+
+
+/* CONTAINER */
+.container{
+	width: #{$container-width};
+	margin: 0 auto;
+}
+
+/* ROWS */
+.row{
+	width: 100%;
+
+	$first-cols: get-columns($pseudo: ":first-child");
+	$last-cols: get-columns($pseudo: ":last-child");
+	$first-last-cols: "#{$first-cols}, #{$last-cols}";
+
+	// clear float on the row last column
+	
+	&:after{
+		content: "";
+		display: block;
+		clear: both;
+	}
+	
+
+	// remove padding from row first and last column
+	#{$first-cols}{
+		padding-left: 0;
+	}
+
+	#{$last-cols}{
+		padding-right: 0;
+	}
+}
+
+/* COLS */
+$cols: get-columns();
+
+#{$cols}{
+	@include column-display;
+}
+
+@include set-columns-width;
+@include set-columns-offset;
+
+.col-no-margin-left{
+	margin-left: 0;
+}
+
+.col-no-margin-right{
+	margin-right: 0;
+}
+.col-no-margin{
+	@extend .col-no-margin-left;
+	@extend .col-no-margin-right;
+}
