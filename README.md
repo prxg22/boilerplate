@@ -2,19 +2,25 @@
 Angular, SASS and Gulp front-end projects boilerplate
 
 ## Quickstart
+
 - Clone the repository
 
-- Install 'npm' dependecies
-````npm install
+- Install `npm` dependecies
 
-- Move to 'src' folder
-````cd src
+    `$ npm install`
 
-- Install 'bower' dependecies
-````bower install
+- Move to `src/` folder
+
+    `$ cd src`
+
+- Install `bower` dependecies
+
+    `$ bower install`
 
 - Start server to development
-````gulp
+
+    `$ gulp`
 
 - Build project on 'dist/' folder
-````gulp build
+
+    `$ gulp build`
