@@ -99,11 +99,11 @@ $col-margin: 10px;
 
 	// remove padding from row first and last column
 	#{$first-cols}{
-		padding-left: 0;
+		margin-left: 0;
 	}
 
 	#{$last-cols}{
-		padding-right: 0;
+		margin-right: 0;
 	}
 }
 
